@@ -1,13 +1,18 @@
-from auth import authentication
+import views
 
 print("<< PARKING BOSCO >>")
 
-authType = int(authentication())
+authType = int(views.init_menu())
 
 print(authType)
 
-if authType==1:
-    print("Ha entrado como cliente")
+if authType == 1:
+    opCliente = int(views.menu_cliente())
 
-if authType==2:
+    if opCliente == 1:
+        matricula = int(input(''))
+
+
+
+if authType == 2:
     print("Ha entrado como administrador")
