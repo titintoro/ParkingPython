@@ -5,7 +5,7 @@ def menu_cliente():
                 "\n\t2. Depositar coche con abono."
                 "\n\t3. Retirar coche sin abono."
                 "\n\t4. Retirar coche con abono."
-                "\n\t5. Menú de abonos.")
+                "\n\t5. Menú de abonos.\n")
     return res;
 
 
