@@ -2,7 +2,10 @@ from models.parking import Parking
 from models.vehiculo import Vehiculo
 from datetime import datetime, timedelta
 from models.cobro import Cobro
+import views
 import random
+
+
 class ClienteService:
 
     def depositar_vehiculo_sin_abono(parking):
@@ -22,15 +25,17 @@ class ClienteService:
                     print(f'\nSe le ha asignado la plaza {p.id_plaza}, adelante.\n')
                     Parking.mostrar_todas_las_plazas(parking)
                     salir = True
+                    views.ticket(p.fecha_ocupacion, p.vehiculo.matricula, p.id_plaza, p.pin)
 
             if tipo == 2 and salir == False:
                 if p.estado.__eq__('libre') and p.vehiculo.tipo.__eq__('Moto'):
                     p.estado = 'ocupado'
                     p.fecha_ocupacion = datetime.now()
                     p.vehiculo.matricula = matricula
-                    p.pin = random.randrange(1000,10000)
+                    p.pin = random.randrange(1000, 10000)
                     print(f'\nSe le ha asignado la plaza {p.id_plaza}, adelante.\n')
                     salir = True
+                    views.ticket(p.fecha_ocupacion, p.vehiculo.matricula, p.id_plaza, p.pin)
 
             if salir == False and tipo == 3:
                 if p.estado.__eq__('libre') and p.vehiculo.tipo.__eq__('Movilidad reducida'):
@@ -40,6 +45,7 @@ class ClienteService:
                     p.pin = random.randrange(1000, 10000)
                     print(f'\nSe le ha asignado la plaza {p.id_plaza}, adelante.\n')
                     salir = True
+                    views.ticket(p.fecha_ocupacion, p.vehiculo.matricula, p.id_plaza, p.pin)
 
         if not salir:
             print('El parking está lleno, vuelva más tarde, disculpe las molestias.\n')
@@ -49,16 +55,16 @@ class ClienteService:
         id_plaza = int(input('Introduzca el id de la plaza de su vehículo:'))
         pin = int(input('Introduzca el pin de su ticket:'))
         precio = 0
-        plaza = parking.plazas[id_plaza-1]
+        plaza = parking.plazas[id_plaza - 1]
 
         if pin == plaza.pin and id_plaza == plaza.id_plaza and matricula == plaza.vehiculo.matricula:
-            diferencia = ((datetime.now()-plaza.fecha_ocupacion).total_seconds()*60)
+            diferencia = round(((datetime.now() - plaza.fecha_ocupacion).total_seconds() / 60), 2)
             precio = diferencia * 0.7
+            print(precio)
             parking.add_cobro_to_parking(Cobro(precio))
             plaza.estado = 'libre'
             plaza.vehiculo.matricula = ''
             plaza.pin = 0
-
 
     def depositar_vehiculo_con_abono(parking):
         salir = False
