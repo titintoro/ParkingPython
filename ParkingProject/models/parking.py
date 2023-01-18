@@ -27,7 +27,7 @@ class Parking:
 
     @property
     def cobros(self):
-        return self.__plazas
+        return self.__cobros
 
     @cobros.setter
     def cobros(self, x):

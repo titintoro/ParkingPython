@@ -1,6 +1,6 @@
 class Abonado:
     def __init__(self, dni, nombre, apellidos, num_tarjeta, tipo_abono, email, vehiculo, plaza, pin,
-                 fecha_activacion_abono, fecha_caducidad_abono):
+                 fecha_activacion_abono, fecha_caducidad_abono,cobro):
         self.__dni = dni
         self.__nombre = nombre
         self.__apellidos = apellidos
@@ -12,6 +12,15 @@ class Abonado:
         self.__pin = pin
         self.__fecha_activacion_abono = fecha_activacion_abono
         self.__fecha_caducidad_abono = fecha_caducidad_abono
+        self.__cobro = cobro
+
+    @property
+    def cobro(self):
+        return self.__cobro
+
+    @cobro.setter
+    def cobro(self, cobro):
+        self.__cobro = cobro
 
     @property
     def dni(self):

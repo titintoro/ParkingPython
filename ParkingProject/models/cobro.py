@@ -3,9 +3,19 @@ from datetime import datetime
 
 class Cobro:
 
-    def __init__(self, precio):
+    def __init__(self, precio, is_abonado):
         self.__precio = precio
         self.__fecha_cobro = datetime.now()
+        self.__is_abonado = is_abonado
+
+    @property
+    def is_abonado(self):
+        return self.__is_abonado
+
+    @is_abonado.setter
+    def is_abonado(self, x):
+        self.__is_abonado = x
+
 
     @property
     def precio(self):

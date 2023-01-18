@@ -2,9 +2,9 @@ import views
 from datetime import datetime
 from models.plaza import Plaza
 from models.parking import Parking
-from services.cliente_service import ClienteService
+import services.cliente_service as cserv
 from models.vehiculo import Vehiculo
-
+import services.admin_service as aserv
 print("<< PARKING BOSCO >>")
 
 plazas = []
@@ -31,21 +31,35 @@ while authType != 0:
         opCliente = int(views.menu_cliente())
 
         if opCliente == 1:
-            ClienteService.depositar_vehiculo_sin_abono(parking)
+            cserv.depositar_vehiculo_sin_abono(parking)
 
         if opCliente == 2:
-            ClienteService.depositar_vehiculo_con_abono(parking)
+            cserv.depositar_vehiculo_con_abono(parking)
 
         if opCliente == 3:
-            ClienteService.retirar_vehiculo_sin_abono(parking)
+            cserv.retirar_vehiculo_sin_abono(parking)
 
         if opCliente == 4:
-            ClienteService.retirar_vehiculo_con_abono(parking)
+            cserv.retirar_vehiculo_con_abono(parking)
 
-        if opCliente == 5:
-            ClienteService.crear_abonado(parking)
+
     if authType == 2:
-        print("Ha entrado como administrador")
+
+        op = int(views.menu_admin())
+        if op == 1:
+            aserv.mostrar_datos_plazas_parking(parking)
+
+        if op == 2:
+            aserv.consultar_cobros_no_abonos(parking)
+
+        if op == 3:
+            aserv.consultar_cobros_abonos(parking)
+
+        if op == 4:
+            aserv.crear_abonado(parking)
+
+        if op == 5:
+            cserv.crear_abonado(parking)
 
     authType = int(views.init_menu())
 

@@ -14,6 +14,7 @@ class Plaza:
     @pin.setter
     def pin(self, x):
         self.__pin = x
+
     @property
     def fecha_ocupacion(self):
         return self.__fecha_ocupacion
@@ -48,5 +49,3 @@ class Plaza:
 
     def __str__(self):
         return f"Plaza\t{self.__id_plaza}\t{self.__pin}\t{self.__estado}\t\t{self.__vehiculo}"
-
-
