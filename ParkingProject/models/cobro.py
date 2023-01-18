@@ -25,4 +25,4 @@ class Cobro:
         self.__fecha_cobro = x
 
     def __str__(self):
-        return f"Plaza\t{self.__fecha_cobro}\t{self.__precio}."
+        return f"Cobro: \t{self.__fecha_cobro}\t{self.__precio}."

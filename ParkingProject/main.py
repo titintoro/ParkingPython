@@ -36,6 +36,8 @@ while authType != 0:
         if opCliente == 3:
             ClienteService.retirar_vehiculo_sin_abono(parking)
 
+        if opCliente == 5:
+            ClienteService.crear_abonado(parking)
     if authType == 2:
         print("Ha entrado como administrador")
 

@@ -41,3 +41,7 @@ class Parking:
 
     def add_abonado_to_parking(self, abonado):
         self.__abonados.append(abonado)
+
+    def mostrar_todos_los_cobros(self):
+        for c in self.__cobros:
+            print(c)
