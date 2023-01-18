@@ -33,8 +33,14 @@ while authType != 0:
         if opCliente == 1:
             ClienteService.depositar_vehiculo_sin_abono(parking)
 
+        if opCliente == 2:
+            ClienteService.depositar_vehiculo_con_abono(parking)
+
         if opCliente == 3:
             ClienteService.retirar_vehiculo_sin_abono(parking)
+
+        if opCliente == 4:
+            ClienteService.retirar_vehiculo_con_abono(parking)
 
         if opCliente == 5:
             ClienteService.crear_abonado(parking)

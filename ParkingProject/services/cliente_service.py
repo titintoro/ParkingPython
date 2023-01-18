@@ -67,18 +67,6 @@ class ClienteService:
             plaza.vehiculo.matricula = ''
             plaza.pin = 0
 
-    def depositar_vehiculo_con_abono(parking):
-        salir = False
-        matricula = input('Introduzca la matrícula de su vehículo:\n')
-        dni = input('Introduzca su DNI:\n')
-
-        for p in parking.plazas:
-            if salir == False and p.estado.__eq__('ocupado'):
-                p.estado = 'ocupado'
-                print(f'\nSe le ha asignado la plaza {p.id_plaza}')
-                salir = True
-                print(f'{p.cobro}')
-
     def crear_abonado(parking):
 
         salir = False
@@ -206,3 +194,28 @@ class ClienteService:
 
             elif 1 > tipo > 3:
                 print('Ha introducido un valor incorrecto.')
+
+    def depositar_vehiculo_con_abono(parking):
+        parking.mostrar_todas_las_plazas()
+        matricula = input('Introduzca la matrícula de su vehículo:')
+        dni = input('Introduzca su DNI')
+
+        for a in parking.abonados:
+            if a.dni == dni and a.plaza.vehiculo.matricula == matricula and a.plaza.estado == 'abono libre':
+                a.plaza.estado = 'abono ocupado'
+
+            else:
+                print('Ha introducido datos erróneos')
+
+    def retirar_vehiculo_con_abono(parking):
+        parking.mostrar_todas_las_plazas()
+        id_plaza = int(input('Introduzca el id de su plaza'))
+        matricula = input('Introduzca la matrícula de su vehículo:')
+        pin = int(input('Introduzca el pin de su ticket:'))
+
+        for a in parking.abonados:
+            if a.plaza.id_plaza == id_plaza and a.plaza.vehiculo.matricula == matricula and a.plaza.pin == pin and a.plaza.estado == 'abono ocupado':
+                a.plaza.estado = 'abono libre'
+
+            else:
+                print('Ha introducido datos erróneos')
