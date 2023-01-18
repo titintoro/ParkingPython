@@ -32,8 +32,8 @@ def consultar_cobros_no_abonos(parking):
     min_fin = int(input('Introduzca el minuto de fin'))
     seg_fin = int(input('Introduzca el segundo de fin'))
 
-    fecha_inicio = datetime(anio_inicio,mes_inicio,dia_inicio,hora_inicio,min_inicio,seg_inicio)
-    fecha_fin = datetime(anio_fin,mes_fin,dia_fin,hora_fin,min_fin,seg_fin)
+    fecha_inicio = datetime(anio_inicio, mes_inicio, dia_inicio, hora_inicio, min_inicio, seg_inicio)
+    fecha_fin = datetime(anio_fin, mes_fin, dia_fin, hora_fin, min_fin, seg_fin)
     for c in parking.cobros:
         if not c.is_abonado and fecha_inicio < c.fecha_cobro < fecha_fin:
             print(f'Fecha cobro:{c.fecha_cobro}\t\t {c.precio}')
@@ -63,6 +63,7 @@ def crear_abonado(parking):
                 p.vehiculo.matricula = matricula
                 p.pin = random.randrange(1000, 10000)
                 fecha_caducidad = 0
+                precio = 0
                 print(f'\nSe le ha reservado la plaza {p.id_plaza} para su abono.\n')
 
                 if tipo_abono == 1:
@@ -80,13 +81,13 @@ def crear_abonado(parking):
                     fecha_caducidad = datetime.now().replace(year=+1)
                     precio = 200
 
-                cobro = Cobro(precio,True)
+                cobro = Cobro(precio, fecha_caducidad, True)
                 parking.add_cobro_to_parking(cobro)
 
                 Parking.add_abonado_to_parking(parking,
                                                Abonado(dni, nombre, apellidos, num_tarjeta, tipo_abono, email,
                                                        p.vehiculo, p, p.pin,
-                                                       p.fecha_ocupacion, fecha_caducidad,cobro))
+                                                       p.fecha_ocupacion, fecha_caducidad, cobro))
 
                 Parking.mostrar_todas_las_plazas(parking)
                 salir = True
@@ -152,7 +153,7 @@ def crear_abonado(parking):
                     fecha_caducidad = datetime.now().replace(year=+1)
                     precio = 200
 
-                cobro = Cobro(precio, True)
+                cobro = Cobro(precio, fecha_caducidad, True)
                 parking.add_cobro_to_parking(cobro)
                 Parking.add_abonado_to_parking(parking,
                                                Abonado(dni, nombre, apellidos, num_tarjeta, tipo_abono, email,
@@ -170,17 +171,69 @@ def crear_abonado(parking):
         elif 1 > tipo > 3:
             print('Ha introducido un valor incorrecto.')
 
+
 def modificar_abono(parking):
     id_plaza = int(input('Introduzca el id de su plaza abonada:'))
-    pin = input('Introduzca el pin asociado a su abono:')
-    op = input('Qué desea hacer:'
+    pin = int(input('Introduzca el pin asociado a su abono:'))
+    op = int(input('Qué desea hacer:'
                '\n\t1. Modificar Datos Personales'
-               '\n\t2. Ampliar Abono')
-    if op==1:
-        dni = input('Introduzca su DNI:\n')
-        nombre = input('Introduzca su nombre:\n')
-        num_tarjeta = input('Introduzca su número de tarjeta:\n')
-        apellidos = input('Introduzca sus apellidos:\n')
-        email = input('Introduzca su email:\n')
+               '\n\t2. Ampliar Abono'))
+    for a in parking.abonados:
+        if id_plaza == a.plaza.id_plaza and pin == a.plaza.pin:
+            if op == 1:
+                dni = input('Introduzca su nuevo DNI:\n')
+                nombre = input('Introduzca su nuevo nombre:\n')
+                apellidos = input('Introduzca sus nuevos apellidos:\n')
+                num_tarjeta = input('Introduzca su nuevo número de tarjeta:\n')
+                email = input('Introduzca su nuevo email:\n')
 
+                a.nombre = nombre
+                a.dni = dni
+                a.num_tarjeta = num_tarjeta
+                a.apellidos = apellidos
+                a.email = a.email
 
+            if op == 2:
+                tipo_abono = int(input('Introduzca cuánto tiempo quiere ampliar su abono(SELECCIONE 1, 2, 3 O 4):'
+                                       '\n1. Un mes'
+                                       '\n2. Tres meses'
+                                       '\n3. Seis meses'
+                                       '\n4. Un año'))
+                if tipo_abono == 1:
+                    fecha_caducidad = a.fecha_caducidad_abono.replace(month=+1)
+                    a.fecha_caducidad_abono = fecha_caducidad
+                    precio = 25
+                    cobro = Cobro(precio, fecha_caducidad, True)
+                    a.cobro = cobro
+                    parking.add_cobro_to_parking(cobro)
+                    print('Ha ampliado su abono un mes.')
+
+                if tipo_abono == 2:
+                    fecha_caducidad = a.fecha_caducidad_abono.replace(month=+3)
+                    a.fecha_caducidad_abono = fecha_caducidad
+                    precio = 70
+                    cobro = Cobro(precio, fecha_caducidad, True)
+                    a.cobro = cobro
+                    parking.add_cobro_to_parking(cobro)
+                    print('Ha ampliado su abono tres meses.')
+
+                if tipo_abono == 3:
+                    fecha_caducidad = a.fecha_caducidad_abono.replace(month=+6)
+                    a.fecha_caducidad_abono = fecha_caducidad
+                    precio = 130
+                    cobro = Cobro(precio, fecha_caducidad, True)
+                    a.cobro = cobro
+                    parking.add_cobro_to_parking(cobro)
+                    print('Ha ampliado su abono seis meses.')
+
+                if tipo_abono == 4:
+                    fecha_caducidad = a.fecha_caducidad_abono.replace(year=+1)
+                    a.fecha_caducidad_abono = fecha_caducidad
+                    precio = 200
+                    cobro = Cobro(precio, fecha_caducidad, True)
+                    a.cobro = cobro
+                    parking.add_cobro_to_parking(cobro)
+                    print('Ha ampliado su abono un año.')
+
+                else:
+                    print('Ha introducido un valor incorrecto.')

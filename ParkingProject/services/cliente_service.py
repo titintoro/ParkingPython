@@ -65,7 +65,7 @@ def retirar_vehiculo_sin_abono(parking):
         if plaza.vehiculo.tipo == 'Movilidad reducida':
             precio = diferencia * 0.10
         print(precio)
-        parking.add_cobro_to_parking(Cobro(precio, False))
+        parking.add_cobro_to_parking(Cobro(precio, datetime.now(), False))
         plaza.estado = 'libre'
         plaza.vehiculo.matricula = ''
         plaza.pin = 0

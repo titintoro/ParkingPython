@@ -5,6 +5,7 @@ from models.parking import Parking
 import services.cliente_service as cserv
 from models.vehiculo import Vehiculo
 import services.admin_service as aserv
+
 print("<< PARKING BOSCO >>")
 
 plazas = []
@@ -20,7 +21,6 @@ for p in range(1, 51):
     if 43 <= p <= 51:
         plaza = Plaza('libre', p, Vehiculo('Movilidad reducida'), datetime.now())
         parking.add_plaza_to_parking(plaza)
-
 
 authType = int(views.init_menu())
 
@@ -42,7 +42,6 @@ while authType != 0:
         if opCliente == 4:
             cserv.retirar_vehiculo_con_abono(parking)
 
-
     if authType == 2:
 
         op = int(views.menu_admin())
@@ -59,7 +58,6 @@ while authType != 0:
             aserv.crear_abonado(parking)
 
         if op == 5:
-            cserv.crear_abonado(parking)
+            aserv.modificar_abono(parking)
 
     authType = int(views.init_menu())
-
