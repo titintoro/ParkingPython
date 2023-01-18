@@ -16,7 +16,7 @@ def menu_admin():
                 "\n\t3. Consultar Abonos."
                 "\n\t4. Dar de alta un abono."
                 "\n\t5. Modificar abono."
-                "\n\t6. Dar de baja abono.\n"
+                "\n\t6. Dar de baja abono."
                 "\n\t7. Consultar abonos que caducan en el mes seleccionado."
                 "\n\t8. Consultar abonos que caducan en los próximos 10 días")
     return res
@@ -24,8 +24,10 @@ def menu_admin():
 
 def init_menu():
     res = input("\nIndique su rol en el parking (PRESIONE 1 o 2):"
+                "\nRECUERDE GUARDAR ANTES DE CERRAR EL PROGRAMA"
                 "\n\t1. Cliente"
-                "\n\t2. Administrado\n")
+                "\n\t2. Administrador\n"
+                "\n\t0. GUARDAR Y SALIR")
     return res
 
 

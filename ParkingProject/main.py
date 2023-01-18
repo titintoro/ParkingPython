@@ -5,29 +5,21 @@ from models.parking import Parking
 import services.cliente_service as cserv
 from models.vehiculo import Vehiculo
 import services.admin_service as aserv
+import pickle
 
-print("<< PARKING BOSCO >>")
 
-plazas = []
-parking = Parking(plazas)
+f = open('parkings.pckl', 'rb')
+parkings = pickle.load(f)
+parking = parkings[0]
+f.close()
 
-for p in range(1, 51):
-    if 1 <= p <= 35:
-        plaza = Plaza('libre', p, Vehiculo('Turismo'), datetime.now())
-        parking.add_plaza_to_parking(plaza)
-    if 36 <= p <= 42:
-        plaza = Plaza('libre', p, Vehiculo('Moto'), datetime.now())
-        parking.add_plaza_to_parking(plaza)
-    if 43 <= p <= 51:
-        plaza = Plaza('libre', p, Vehiculo('Movilidad reducida'), datetime.now())
-        parking.add_plaza_to_parking(plaza)
+auth_type = 1
 
-authType = int(views.init_menu())
+while auth_type != 0:
+    auth_type = int(views.init_menu())
+    print(auth_type)
 
-while authType != 0:
-    print(authType)
-
-    if authType == 1:
+    if auth_type == 1:
         opCliente = int(views.menu_cliente())
 
         if opCliente == 1:
@@ -42,7 +34,7 @@ while authType != 0:
         if opCliente == 4:
             cserv.retirar_vehiculo_con_abono(parking)
 
-    if authType == 2:
+    if auth_type == 2:
 
         op = int(views.menu_admin())
         if op == 1:
@@ -60,4 +52,20 @@ while authType != 0:
         if op == 5:
             aserv.modificar_abono(parking)
 
-    authType = int(views.init_menu())
+        if op == 6:
+            aserv.dar_de_baja_abono(parking)
+
+        if op == 7:
+            aserv.modificar_abono(parking)
+
+        if op == 8:
+            aserv.modificar_abono(parking)
+
+    if auth_type == 0:
+        parkingsupdate = [parking]
+        f = open('parkings.pckl', 'wb')
+        pickle.dump(parkingsupdate, f)
+        f.close()
+
+
+

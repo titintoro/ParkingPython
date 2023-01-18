@@ -13,8 +13,12 @@ def mostrar_datos_plazas_parking(parking):
 
 
 def consultar_cobros_abonos(parking):
-    for a in parking.abonados:
-        print(f'Abonado: {a.nombre}\t\tAbono: {a.tipo_abono}\t\tPrecio: {a.cobro.precio}')
+    if not parking.abonados:
+        print('\nNo hay abonados activos ahora mismo.')
+
+    else:
+        for a in parking.abonados:
+            print(f'Abonado: {a.nombre}\t\tAbono: {a.tipo_abono}\t\tPrecio: {a.cobro.precio}')
 
 
 def consultar_cobros_no_abonos(parking):
@@ -117,7 +121,7 @@ def crear_abonado(parking):
                     fecha_caducidad = datetime.now().replace(year=+1)
                     precio = 200
 
-                cobro = Cobro(precio, True)
+                cobro = Cobro(precio, fecha_caducidad, True)
                 parking.add_cobro_to_parking(cobro)
                 Parking.add_abonado_to_parking(parking,
                                                Abonado(dni, nombre, apellidos, num_tarjeta, tipo_abono, email,
@@ -176,8 +180,8 @@ def modificar_abono(parking):
     id_plaza = int(input('Introduzca el id de su plaza abonada:'))
     pin = int(input('Introduzca el pin asociado a su abono:'))
     op = int(input('Qué desea hacer:'
-               '\n\t1. Modificar Datos Personales'
-               '\n\t2. Ampliar Abono'))
+                   '\n\t1. Modificar Datos Personales'
+                   '\n\t2. Ampliar Abono'))
     for a in parking.abonados:
         if id_plaza == a.plaza.id_plaza and pin == a.plaza.pin:
             if op == 1:
@@ -191,7 +195,7 @@ def modificar_abono(parking):
                 a.dni = dni
                 a.num_tarjeta = num_tarjeta
                 a.apellidos = apellidos
-                a.email = a.email
+                a.email = email
 
             if op == 2:
                 tipo_abono = int(input('Introduzca cuánto tiempo quiere ampliar su abono(SELECCIONE 1, 2, 3 O 4):'
@@ -237,3 +241,22 @@ def modificar_abono(parking):
 
                 else:
                     print('Ha introducido un valor incorrecto.')
+
+
+def dar_de_baja_abono(parking):
+    id_plaza = int(input('Introduzca el id de su plaza abonada:'))
+    pin = int(input('Introduzca el pin asociado a su abono:'))
+    for a in parking.abonados:
+        if a.plaza.id_plaza == id_plaza:
+            parking.abonados.remove(a)
+            del(a)
+        else:
+            print('El abonado no existe')
+
+
+# def mostrar_abonos_mes_indicado(parking):
+#    mes = indique el mes
+
+#def mostrar_abonos_caducan_prox_10_dias(parking):
+ #   for a in parking:
+  #      if a.fecha_caducidad_abono

@@ -94,5 +94,6 @@ def retirar_vehiculo_con_abono(parking):
         if a.plaza.id_plaza == id_plaza and a.plaza.vehiculo.matricula == matricula and a.plaza.pin == pin and a.plaza.estado == 'abono ocupado':
             a.plaza.estado = 'abono libre'
 
+
         else:
             print('Ha introducido datos erróneos')

@@ -109,3 +109,4 @@ class Abonado:
     @fecha_caducidad_abono.setter
     def fecha_caducidad_abono(self, fecha_caducidad_abono):
         self.__fecha_caducidad_abono = fecha_caducidad_abono
+
