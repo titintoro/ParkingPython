@@ -56,7 +56,7 @@ while auth_type != 0:
             aserv.dar_de_baja_abono(parking)
 
         if op == 7:
-            aserv.modificar_abono(parking)
+            aserv.mostrar_abonos_mes_indicado(parking)
 
         if op == 8:
             aserv.modificar_abono(parking)
