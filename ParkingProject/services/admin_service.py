@@ -17,11 +17,11 @@ def consultar_cobros_abonos(parking):
         print('\nNo hay abonados activos ahora mismo.')
 
     else:
+        sum = 0
         for a in parking.abonados:
-            print(
-                f'Abonado: {a.nombre}\t\tAbono: {a.tipo_abono}\t\tPrecio: {a.cobro.precio}\t\tFecha Caducidad {a.fecha_caducidad_abono}')
-
-
+            print(f'Abonado: {a.nombre}\t\tAbono: {a.tipo_abono}\t\tPrecio: {a.cobro.precio}\t\tFecha Caducidad {a.fecha_caducidad_abono}')
+            sum += a.cobro.precio
+        print(f'Total recaudado en abonados: {sum}')
 def consultar_cobros_no_abonos(parking):
     anio_inicio = int(input('Introduzca el año de inicio'))
     mes_inicio = int(input('Introduzca el mes de inicio'))
@@ -36,12 +36,14 @@ def consultar_cobros_no_abonos(parking):
     hora_fin = int(input('Introduzca la hora de fin'))
     min_fin = int(input('Introduzca el minuto de fin'))
     seg_fin = int(input('Introduzca el segundo de fin'))
-
+    sum = 0
     fecha_inicio = datetime(anio_inicio, mes_inicio, dia_inicio, hora_inicio, min_inicio, seg_inicio)
     fecha_fin = datetime(anio_fin, mes_fin, dia_fin, hora_fin, min_fin, seg_fin)
     for c in parking.cobros:
         if not c.is_abonado and fecha_inicio < c.fecha_cobro < fecha_fin:
-            print(f'Fecha cobro:{c.fecha_cobro}\t\t {c.precio}')
+            sum += c.precio
+            print(f'Fecha cobro: {c.fecha_cobro}\t\tPrecio: {c.precio}')
+    print(f'Total recaudado en no abonados: {sum}')
 
 
 def crear_abonado(parking):
