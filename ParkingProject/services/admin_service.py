@@ -1,5 +1,5 @@
 from models.parking import Parking
-from datetime import datetime
+from datetime import datetime, timedelta
 from models.cobro import Cobro
 from models.abonado import Abonado
 import views
@@ -18,7 +18,8 @@ def consultar_cobros_abonos(parking):
 
     else:
         for a in parking.abonados:
-            print(f'Abonado: {a.nombre}\t\tAbono: {a.tipo_abono}\t\tPrecio: {a.cobro.precio}\t\tFecha Caducidad {a.fecha_caducidad_abono}')
+            print(
+                f'Abonado: {a.nombre}\t\tAbono: {a.tipo_abono}\t\tPrecio: {a.cobro.precio}\t\tFecha Caducidad {a.fecha_caducidad_abono}')
 
 
 def consultar_cobros_no_abonos(parking):
@@ -72,7 +73,7 @@ def crear_abonado(parking):
 
                 if tipo_abono == 1:
                     mes_caducidad = datetime.now().month + 1
-                    fecha_caducidad = datetime.now().replace(month =+ mes_caducidad)
+                    fecha_caducidad = datetime.now().replace(month=+ mes_caducidad)
                     precio = 25
                 if tipo_abono == 2:
                     mes_caducidad = datetime.now().month + 3
@@ -112,7 +113,7 @@ def crear_abonado(parking):
                 print(f'\nSe le ha reservado la plaza {p.id_plaza} para su abono.\n')
                 if tipo_abono == 1:
                     mes_caducidad = datetime.now().month + 1
-                    fecha_caducidad = datetime.now().replace(month =+ mes_caducidad)
+                    fecha_caducidad = datetime.now().replace(month=+ mes_caducidad)
                     precio = 25
                 if tipo_abono == 2:
                     mes_caducidad = datetime.now().month + 3
@@ -153,7 +154,7 @@ def crear_abonado(parking):
 
                 if tipo_abono == 1:
                     mes_caducidad = datetime.now().month + 1
-                    fecha_caducidad = datetime.now().replace(month =+ mes_caducidad)
+                    fecha_caducidad = datetime.now().replace(month=+ mes_caducidad)
                     precio = 25
                 if tipo_abono == 2:
                     mes_caducidad = datetime.now().month + 3
@@ -217,7 +218,8 @@ def modificar_abono(parking):
                                        '\n3. Seis meses'
                                        '\n4. Un año'))
                 if tipo_abono == 1:
-                    fecha_caducidad = a.fecha_caducidad_abono.replace(month=+1)
+                    mes_caducidad = datetime.now().month + 1
+                    fecha_caducidad = datetime.now().replace(month=+ mes_caducidad)
                     a.fecha_caducidad_abono = fecha_caducidad
                     precio = 25
                     cobro = Cobro(precio, fecha_caducidad, True)
@@ -226,7 +228,8 @@ def modificar_abono(parking):
                     print('Ha ampliado su abono un mes.')
 
                 if tipo_abono == 2:
-                    fecha_caducidad = a.fecha_caducidad_abono.replace(month=+3)
+                    mes_caducidad = datetime.now().month + 1
+                    fecha_caducidad = datetime.now().replace(month=+ mes_caducidad)
                     a.fecha_caducidad_abono = fecha_caducidad
                     precio = 70
                     cobro = Cobro(precio, fecha_caducidad, True)
@@ -235,7 +238,8 @@ def modificar_abono(parking):
                     print('Ha ampliado su abono tres meses.')
 
                 if tipo_abono == 3:
-                    fecha_caducidad = a.fecha_caducidad_abono.replace(month=+6)
+                    mes_caducidad = datetime.now().month + 1
+                    fecha_caducidad = datetime.now().replace(month=+ mes_caducidad)
                     a.fecha_caducidad_abono = fecha_caducidad
                     precio = 130
                     cobro = Cobro(precio, fecha_caducidad, True)
@@ -244,7 +248,8 @@ def modificar_abono(parking):
                     print('Ha ampliado su abono seis meses.')
 
                 if tipo_abono == 4:
-                    fecha_caducidad = a.fecha_caducidad_abono.replace(year=+1)
+                    anio_caducidad = datetime.now().year + 1
+                    fecha_caducidad = datetime.now().replace(year=+ anio_caducidad)
                     a.fecha_caducidad_abono = fecha_caducidad
                     precio = 200
                     cobro = Cobro(precio, fecha_caducidad, True)
@@ -262,7 +267,7 @@ def dar_de_baja_abono(parking):
     for a in parking.abonados:
         if a.plaza.id_plaza == id_plaza:
             parking.abonados.remove(a)
-            del(a)
+            del (a)
         else:
             print('El abonado no existe')
 
@@ -271,12 +276,12 @@ def mostrar_abonos_mes_indicado(parking):
     anio_inicio = int(input('Indique el año que quiere comprobar:'))
     mes_inicio = int(input('Indique el mes que quiere comprobar'))
     anio_fin = anio_inicio
-    mes_fin = mes_inicio+1
-    if int(mes_inicio)==12:
-        anio_fin = anio_fin +1
-        mes_fin= 1
+    mes_fin = mes_inicio + 1
+    if int(mes_inicio) == 12:
+        anio_fin = anio_fin + 1
+        mes_fin = 1
 
-    fecha_inicio_comprobacion = datetime(anio_inicio,mes_inicio,1)
+    fecha_inicio_comprobacion = datetime(anio_inicio, mes_inicio, 1)
     fecha_fin_comprobacion = datetime(anio_fin, mes_fin, 1)
     for a in parking.abonados:
         if fecha_inicio_comprobacion < a.fecha_caducidad_abono < fecha_fin_comprobacion:
@@ -285,8 +290,12 @@ def mostrar_abonos_mes_indicado(parking):
                   f'\n\nAbonado:{a.nombre}\t\tFecha caducidad: {a.fecha_caducidad_abono}')
 
 
+def mostrar_abonos_caducan_prox_10_dias(parking):
+    print('En los próximos 10 días caducan los siguientes abonos:')
 
-
-#def mostrar_abonos_caducan_prox_10_dias(parking):
- #   for a in parking:
-  #      if a.fecha_caducidad_abono
+    fecha_fin_caducidad = datetime.now() + timedelta(days=10)
+    print(fecha_fin_caducidad)
+    for a in parking.abonados:
+        if datetime.now() <= a.fecha_caducidad_abono <= fecha_fin_caducidad:
+            print(f'\nLos abonos que caducan en los próximos 10 días son:'
+                  f'\n\nAbonado:{a.nombre}\t\tFecha caducidad: {a.fecha_caducidad_abono}')

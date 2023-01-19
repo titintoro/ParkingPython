@@ -59,7 +59,7 @@ while auth_type != 0:
             aserv.mostrar_abonos_mes_indicado(parking)
 
         if op == 8:
-            aserv.modificar_abono(parking)
+            aserv.mostrar_abonos_caducan_prox_10_dias(parking)
 
     if auth_type == 0:
         parkingsupdate = [parking]
