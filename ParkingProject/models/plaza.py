@@ -48,4 +48,4 @@ class Plaza:
         self.__vehiculo = x
 
     def __str__(self):
-        return f"Plaza\t{self.__id_plaza}\t{self.__pin}\t{self.__estado}\t\t{self.__vehiculo}"
+        return f"Plaza\t{self.__id_plaza}\tPin: {self.__pin}\tEstado: {self.__estado}\t\t{self.__vehiculo}"

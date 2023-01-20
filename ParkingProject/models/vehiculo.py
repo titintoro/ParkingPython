@@ -21,4 +21,4 @@ class Vehiculo:
         self.__tipo = tipo
 
     def __str__(self):
-        return f'{self.__tipo} {self.__matricula}'
+        return f'Tipo: {self.__tipo}\tMatrícula: {self.__matricula}'
