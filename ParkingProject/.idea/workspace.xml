@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29488f00-062c-43e6-8521-a2e7ea39667a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/plaza.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/plaza.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/vehiculo.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/vehiculo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parkings.pckl" beforeDir="false" afterPath="$PROJECT_DIR$/parkings.pckl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/admin_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/admin_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/cliente_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/cliente_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="29488f00-062c-43e6-8521-a2e7ea39667a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +46,8 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\tola.roval21\PycharmProjects\pythonProject\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\titin\Documents\ParkingPython\ParkingProject\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.11 (ParkingProject) (2)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -83,13 +75,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/services/admin_service.py</url>
-          <line>308</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
