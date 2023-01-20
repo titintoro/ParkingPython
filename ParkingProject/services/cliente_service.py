@@ -13,7 +13,8 @@ def depositar_vehiculo_sin_abono(parking):
             salir = False
             matricula = input('Introduzca la matrícula de su vehículo:')
             tipo = int(input(
-                'Seleccione el tipo de vehículo (SELECCIONE 1, 2 O 3):\n\t1. Turismo\n\t2. Moto\n\t3. Vehículo Minusválidos'))
+                'Seleccione el tipo de vehículo (SELECCIONE 1, 2 O 3):\n\t1. Turismo\n\t2. Moto\n\t3. Vehículo '
+                'Minusválidos'))
 
             for p in parking.plazas:
                 if tipo == 1 and salir == False:
